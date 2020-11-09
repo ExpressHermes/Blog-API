@@ -19,7 +19,7 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
-    
+
     class Meta:
         ordering = ["-created_at", "-updated_at"]
 
@@ -28,7 +28,7 @@ class Post(models.Model):
             return reverse("posts_api:post_detail", kwargs={"slug": self.slug})
         except:
             None
-    
+
     @property
     def comments(self):
         instance = self
@@ -43,10 +43,9 @@ def create_slug(instance, new_slug=None):
     qs = Post.objects.filter(slug=slug).order_by("-id")
     exists = qs.exists()
     if exists:
-        new_slug = "%s-%s" %(slug, qs.first().id)
+        new_slug = "%s-%s" % (slug, qs.first().id)
         return create_slug(instance, new_slug=new_slug)
     return slug
-
 
 
 def pre_save_post_receiver(sender, instance, *args, **kwargs):
@@ -66,5 +65,3 @@ class Comment(models.Model):
 
     class Meta:
         ordering = ["-created_at", "-updated_at"]
-
-

@@ -2,37 +2,43 @@ from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
 from django.http import JsonResponse
 
 from rest_framework.decorators import api_view
-from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly, AllowAny
+from rest_framework.permissions import (
+    IsAuthenticated,
+    IsAuthenticatedOrReadOnly,
+    AllowAny,
+)
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.generics import (
     CreateAPIView,
     DestroyAPIView,
-    ListAPIView,  
+    ListAPIView,
     UpdateAPIView,
     RetrieveAPIView,
     RetrieveUpdateAPIView,
-    RetrieveUpdateDestroyAPIView
-    )
+    RetrieveUpdateDestroyAPIView,
+)
 
 from .models import Post, Comment
 from .forms import PostForm, CommentForm
 
 from .mixins import MultipleFieldLookupMixin
 from .serializers import (
-    PostCreateUpdateSerializer, 
-    PostListSerializer, 
-    PostDetailSerializer, 
+    PostCreateUpdateSerializer,
+    PostListSerializer,
+    PostDetailSerializer,
     CommentSerializer,
-    CommentCreateUpdateSerializer
-    )
+    CommentCreateUpdateSerializer,
+)
 
 
 # Create your views here.
 class CreatePostAPIView(APIView):
     queryset = Post.objects.all()
     serializer_class = PostCreateUpdateSerializer
-    permission_classes = [IsAuthenticated, ]
+    permission_classes = [
+        IsAuthenticated,
+    ]
 
     def post(self, request, *args, **kwargs):
         serializer = PostCreateUpdateSerializer(data=request.data)
@@ -51,7 +57,7 @@ class ListPostAPIView(ListAPIView):
 
 class DetailPostAPIView(RetrieveUpdateDestroyAPIView):
     queryset = Post.objects.all()
-    lookup_field = 'slug'
+    lookup_field = "slug"
     serializer_class = PostDetailSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
 
@@ -83,5 +89,5 @@ class DetailCommentAPIView(MultipleFieldLookupMixin, RetrieveUpdateDestroyAPIVie
     permission_classes = [IsAuthenticated]
 
     queryset = Comment.objects.all()
-    lookup_fields = ['parent', 'id']
+    lookup_fields = ["parent", "id"]
     serializer_class = CommentSerializer
