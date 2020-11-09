@@ -23,23 +23,26 @@ class PostCreateUpdateSerializer(serializers.ModelSerializer):
         return value
 
 class PostListSerializer(serializers.ModelSerializer):
+    url = serializers.SerializerMethodField()
     comments = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = Post
         fields = [
                     'id', 
-                    'slug', 
+                    'url',
                     'title', 
                     'author',
-                    'created_at', 
-                    'updated_at',
+                    'description',
                     'comments',
                 ]
 
     def get_comments(self, obj):
         qs = Comment.objects.filter(parent=obj).count()
         return qs
+    
+    def get_url(self, obj):
+        return obj.get_api_url()
 
 
 class PostDetailSerializer(serializers.ModelSerializer):

@@ -14,17 +14,17 @@ class UserCreateSerializer(serializers.ModelSerializer):
         model = User
         fields = ['username', 'email', 'password']
     
-        extra_kwargs = {
+    extra_kwargs = {
                 "password": {"write_only": True}
-            }
-
+                }
 
     def validate(self, data):
-        ''' Email address must be unique '''
-        email = data['email']
-        user_qs = User.objects.filter(email=email)
-        if user_qs.exists():
-            raise serializers.ValidationError("This user has already registered.")
+        # ''' Email address must be unique '''
+        
+        # email = data['email']
+        # user_qs = User.objects.filter(email=email)
+        # if user_qs.exists():
+        #     raise serializers.ValidationError("This user has already registered.")
         return data
 
 
@@ -51,13 +51,11 @@ class UserLoginSerializer(serializers.ModelSerializer):
             'username',
             'email',
             'password',
-            'token',
-            
         ]
 
-        extra_kwargs = {
-                        "password": {"write_only": True}
-                    }
+    extra_kwargs = {
+                "password": {"write_only": True}
+                }
 
     def validate(self, data):
         # email = data['email']

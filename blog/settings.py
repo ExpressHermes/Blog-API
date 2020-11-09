@@ -40,16 +40,30 @@ INSTALLED_APPS = [
     'rest_framework',
     'accounts',
     'posts',
+    'rest_framework.authtoken',
 ]
 
 LOGIN_REDIRECT_URL = '/'
 
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.AllowAny',
-        'rest_framework.permissions.IsAuthenticated',
-    ]
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    ),
+
+
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+
+
+    ), 
+    "DEFAULT_PERMISSION_CLASSES": (
+         'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+    )
 }
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
