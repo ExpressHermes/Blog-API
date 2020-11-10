@@ -134,6 +134,7 @@ class CreateCommentAPIView(APIView):
             type: string,
             required: True
     """
+
     serializer_class = CommentCreateUpdateSerializer
     permission_classes = [IsAuthenticated]
 
@@ -184,7 +185,7 @@ class DetailCommentAPIView(MultipleFieldLookupMixin, RetrieveUpdateDestroyAPIVie
                 required: True
 
     delete:
-    Delete an existing comment 
+    Delete an existing comment
     """
 
     permission_classes = [IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]

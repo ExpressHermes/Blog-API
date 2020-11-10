@@ -1,0 +1,462 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Blog API",
+        "description": "Blog API using Django rest framework",
+        "termsOfService": "https://www.google.com/policies/terms/",
+        "contact": {
+            "email": "contact@snippets.local"
+        },
+        "license": {
+            "name": "BSD License"
+        },
+        "version": "v1"
+    },
+    "host": "127.0.0.1:8000",
+    "schemes": ["http"],
+    "basePath": "/",
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
+    "securityDefinitions": {
+        "Basic": {
+            "type": "basic"
+        }
+    },
+    "security": [{
+        "Basic": []
+    }],
+    "paths": {
+        "/api/": {
+            "get": {
+                "operationId": "api_list",
+                "description": "Returns a list of all existing posts",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/PostList"
+                            }
+                        }
+                    }
+                },
+                "tags": ["api"]
+            },
+            "parameters": []
+        },
+        "/api/create_post/": {
+            "post": {
+                "operationId": "api_create_post_create",
+                "description": "Creates a new post instance. Returns created post data",
+                "parameters": [],
+                "responses": {
+                    "201": {
+                        "description": ""
+                    }
+                },
+                "tags": ["api"]
+            },
+            "parameters": []
+        },
+        "/api/{slug}/": {
+            "get": {
+                "operationId": "api_read",
+                "description": "Returns the details of a post instance. Searches post using slug field.",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/PostDetail"
+                        }
+                    }
+                },
+                "tags": ["api"]
+            },
+            "put": {
+                "operationId": "api_update",
+                "summary": "Updates an existing post. Returns updated post data",
+                "description": "parameters:\n        author:\n            type: integer(id of current user),\n            required=True\n        title:\n            type: string,\n            required: True\n        body:\n            type: string,\n            required: True\n        description:\n            type: string,\n            required: True",
+                "parameters": [{
+                    "name": "data",
+                    "in": "body",
+                    "required": true,
+                    "schema": {
+                        "$ref": "#/definitions/PostDetail"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/PostDetail"
+                        }
+                    }
+                },
+                "tags": ["api"]
+            },
+            "patch": {
+                "operationId": "api_partial_update",
+                "description": "",
+                "parameters": [{
+                    "name": "data",
+                    "in": "body",
+                    "required": true,
+                    "schema": {
+                        "$ref": "#/definitions/PostDetail"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/PostDetail"
+                        }
+                    }
+                },
+                "tags": ["api"]
+            },
+            "delete": {
+                "operationId": "api_delete",
+                "description": "Delete an existing post",
+                "parameters": [],
+                "responses": {
+                    "204": {
+                        "description": ""
+                    }
+                },
+                "tags": ["api"]
+            },
+            "parameters": [{
+                "name": "slug",
+                "in": "path",
+                "required": true,
+                "type": "string",
+                "format": "slug",
+                "pattern": "^[-a-zA-Z0-9_]+$"
+            }]
+        },
+        "/api/{slug}/comment/": {
+            "get": {
+                "operationId": "api_comment_list",
+                "description": "Returns the list of comments on a particular post",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": ["api"]
+            },
+            "parameters": [{
+                "name": "slug",
+                "in": "path",
+                "required": true,
+                "type": "string"
+            }]
+        },
+        "/api/{slug}/comment/create/": {
+            "post": {
+                "operationId": "api_comment_create_create",
+                "description": "Create a comment instnace. Returns created comment data",
+                "parameters": [],
+                "responses": {
+                    "201": {
+                        "description": ""
+                    }
+                },
+                "tags": ["api"]
+            },
+            "parameters": [{
+                "name": "slug",
+                "in": "path",
+                "required": true,
+                "type": "string"
+            }]
+        },
+        "/api/{slug}/comment/{id}/": {
+            "get": {
+                "operationId": "api_comment_read",
+                "description": "Returns the details of a comment instance. Searches comment using comment id and post slug in the url.",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/Comment"
+                        }
+                    }
+                },
+                "tags": ["api"]
+            },
+            "put": {
+                "operationId": "api_comment_update",
+                "summary": "Updates an existing comment. Returns updated comment data",
+                "description": "parameters:\n        parent:\n            type: integer(post id),\n            required=True\n        author:\n            type: integer(current user id),\n            required: True\n        body:\n            type: string,\n            required: True",
+                "parameters": [{
+                    "name": "data",
+                    "in": "body",
+                    "required": true,
+                    "schema": {
+                        "$ref": "#/definitions/Comment"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/Comment"
+                        }
+                    }
+                },
+                "tags": ["api"]
+            },
+            "patch": {
+                "operationId": "api_comment_partial_update",
+                "description": "",
+                "parameters": [{
+                    "name": "data",
+                    "in": "body",
+                    "required": true,
+                    "schema": {
+                        "$ref": "#/definitions/Comment"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/Comment"
+                        }
+                    }
+                },
+                "tags": ["api"]
+            },
+            "delete": {
+                "operationId": "api_comment_delete",
+                "description": "Delete an existing comment",
+                "parameters": [],
+                "responses": {
+                    "204": {
+                        "description": ""
+                    }
+                },
+                "tags": ["api"]
+            },
+            "parameters": [{
+                "name": "id",
+                "in": "path",
+                "description": "A unique integer value identifying this comment.",
+                "required": true,
+                "type": "integer"
+            }, {
+                "name": "slug",
+                "in": "path",
+                "required": true,
+                "type": "string"
+            }]
+        },
+        "/user/": {
+            "get": {
+                "operationId": "user_list",
+                "description": "Returns a list of all existing users",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/User"
+                            }
+                        }
+                    }
+                },
+                "tags": ["user"]
+            },
+            "parameters": []
+        },
+        "/user/login/": {
+            "post": {
+                "operationId": "user_login_create",
+                "description": "Used to login on the browsable api",
+                "parameters": [],
+                "responses": {
+                    "201": {
+                        "description": ""
+                    }
+                },
+                "tags": ["user"]
+            },
+            "parameters": []
+        },
+        "/user/register/": {
+            "post": {
+                "operationId": "user_register_create",
+                "description": "Create new user instance. Returns username, email and token for the created user.",
+                "parameters": [],
+                "responses": {
+                    "201": {
+                        "description": ""
+                    }
+                },
+                "tags": ["user"]
+            },
+            "parameters": []
+        }
+    },
+    "definitions": {
+        "PostList": {
+            "required": ["title", "description"],
+            "type": "object",
+            "properties": {
+                "id": {
+                    "title": "ID",
+                    "type": "integer",
+                    "readOnly": true
+                },
+                "url": {
+                    "title": "Url",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "title": {
+                    "title": "Title",
+                    "type": "string",
+                    "maxLength": 100,
+                    "minLength": 1
+                },
+                "author": {
+                    "title": "Author",
+                    "type": "integer"
+                },
+                "description": {
+                    "title": "Description",
+                    "type": "string",
+                    "maxLength": 200,
+                    "minLength": 1
+                },
+                "comments": {
+                    "title": "Comments",
+                    "type": "string",
+                    "readOnly": true
+                }
+            }
+        },
+        "PostDetail": {
+            "required": ["slug", "title", "description", "body"],
+            "type": "object",
+            "properties": {
+                "id": {
+                    "title": "ID",
+                    "type": "integer",
+                    "readOnly": true
+                },
+                "slug": {
+                    "title": "Slug",
+                    "type": "string",
+                    "format": "slug",
+                    "pattern": "^[-a-zA-Z0-9_]+$",
+                    "maxLength": 50,
+                    "minLength": 1
+                },
+                "title": {
+                    "title": "Title",
+                    "type": "string",
+                    "maxLength": 100,
+                    "minLength": 1
+                },
+                "description": {
+                    "title": "Description",
+                    "type": "string",
+                    "maxLength": 200,
+                    "minLength": 1
+                },
+                "body": {
+                    "title": "Body",
+                    "type": "string",
+                    "minLength": 1
+                },
+                "author": {
+                    "title": "Author",
+                    "type": "integer"
+                },
+                "created_at": {
+                    "title": "Created at",
+                    "type": "string",
+                    "format": "date-time",
+                    "readOnly": true
+                },
+                "updated_at": {
+                    "title": "Updated at",
+                    "type": "string",
+                    "format": "date-time",
+                    "readOnly": true
+                },
+                "comments": {
+                    "title": "Comments",
+                    "type": "string",
+                    "readOnly": true
+                }
+            }
+        },
+        "Comment": {
+            "required": ["parent", "author", "body"],
+            "type": "object",
+            "properties": {
+                "id": {
+                    "title": "ID",
+                    "type": "integer",
+                    "readOnly": true
+                },
+                "parent": {
+                    "title": "Parent",
+                    "type": "integer"
+                },
+                "author": {
+                    "title": "Author",
+                    "type": "integer"
+                },
+                "body": {
+                    "title": "Body",
+                    "type": "string",
+                    "minLength": 1
+                },
+                "created_at": {
+                    "title": "Created at",
+                    "type": "string",
+                    "format": "date-time",
+                    "readOnly": true
+                },
+                "updated_at": {
+                    "title": "Updated at",
+                    "type": "string",
+                    "format": "date-time",
+                    "readOnly": true
+                }
+            }
+        },
+        "User": {
+            "required": ["username"],
+            "type": "object",
+            "properties": {
+                "username": {
+                    "title": "Username",
+                    "description": "Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.",
+                    "type": "string",
+                    "pattern": "^[\\w.@+-]+$",
+                    "maxLength": 150,
+                    "minLength": 1
+                },
+                "email": {
+                    "title": "Email address",
+                    "type": "string",
+                    "format": "email",
+                    "maxLength": 254
+                }
+            }
+        }
+    }
+}

@@ -82,7 +82,7 @@ class UserLoginAPIView(APIView):
     """
     get:
     Not Allowed
-    
+
     post:
     Used to login on the browsable api
 
