@@ -24,15 +24,6 @@ schema_view = get_schema_view(
 urlpatterns = [
     path("admin/", admin.site.urls),
 
-    # api authentication and token generation
-    path("user/", include("accounts.urls", namespace="accounts")),
-
-    # api
-    path("api/", include("posts.urls", namespace="posts_api")),
-
-    # browser login
-    path("api-auth/", include("rest_framework.urls")),
-    
     # documentation urls
     re_path(
         r"^swagger(?P<format>\.json|\.yaml)$",
@@ -47,4 +38,13 @@ urlpatterns = [
     re_path(
         r"^redoc/$", schema_view.with_ui("redoc", cache_timeout=0), name="schema-redoc"
     ),
+
+    # browser login
+    path("api-auth/", include("rest_framework.urls")),
+
+    # api authentication and token generation
+    path("user/", include("accounts.urls", namespace="accounts")),
+
+    # api
+    path("posts/", include("posts.urls", namespace="posts_api")),
 ]

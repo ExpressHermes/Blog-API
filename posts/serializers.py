@@ -50,6 +50,7 @@ class PostListSerializer(serializers.ModelSerializer):
 
 
 class PostDetailSerializer(serializers.ModelSerializer):
+    slug = serializers.SerializerMethodField(read_only=True)
     author = serializers.PrimaryKeyRelatedField(read_only=True)
     comments = serializers.SerializerMethodField(read_only=True)
 
@@ -66,6 +67,9 @@ class PostDetailSerializer(serializers.ModelSerializer):
             "updated_at",
             "comments",
         ]
+
+    def get_slug(self, obj):
+        return obj.slug
 
     def get_comments(self, obj):
         qs = Comment.objects.filter(parent=obj)

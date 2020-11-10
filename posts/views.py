@@ -1,7 +1,4 @@
-from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
-from django.http import JsonResponse
-
-from rest_framework.decorators import api_view
+from django.shortcuts import render, redirect, get_object_or_404
 from rest_framework.permissions import (
     IsAuthenticated,
     IsAuthenticatedOrReadOnly,
@@ -20,7 +17,7 @@ from rest_framework.generics import (
 )
 
 from .models import Post, Comment
-from .permissions import IsOwnerOrReadOnly
+from .permissions import IsOwnerOrReadOnly, IsOwner
 from .mixins import MultipleFieldLookupMixin
 from .serializers import (
     PostCreateUpdateSerializer,
@@ -33,25 +30,10 @@ from .serializers import (
 # Create your views here.
 class CreatePostAPIView(APIView):
     """
-    get:
-    Not Allowed
-
     post:
-    Creates a new post instance. Returns created post data
+        Creates a new post instance. Returns created post data
 
-    parameters:
-        author:
-            type: integer(id of current user),
-            required=True
-        title:
-            type: string,
-            required: True
-        body:
-            type: string,
-            required: True
-        description:
-            type: string,
-            required: True
+        parameters: [title, body, description]
     """
 
     queryset = Post.objects.all()
@@ -72,10 +54,7 @@ class CreatePostAPIView(APIView):
 class ListPostAPIView(ListAPIView):
     """
     get:
-    Returns a list of all existing posts
-
-    post:
-    Not Allowed
+        Returns a list of all existing posts
     """
 
     queryset = Post.objects.all()
@@ -86,27 +65,17 @@ class ListPostAPIView(ListAPIView):
 class DetailPostAPIView(RetrieveUpdateDestroyAPIView):
     """
     get:
-    Returns the details of a post instance. Searches post using slug field.
+        Returns the details of a post instance. Searches post using slug field.
 
     put:
-    Updates an existing post. Returns updated post data
+        Updates an existing post. Returns updated post data
 
-        parameters:
-            author:
-                type: integer(id of user),
-                required=True
-            title:
-                type: string,
-                required: True
-            body:
-                type: string,
-                required: True
-            description:
-                type: string,
-                required: True
+        parameters: [slug, title, body, description]
 
     delete:
-    Delete an existing post
+        Delete an existing post
+
+        parameters = [slug]
     """
 
     queryset = Post.objects.all()
@@ -117,22 +86,11 @@ class DetailPostAPIView(RetrieveUpdateDestroyAPIView):
 
 class CreateCommentAPIView(APIView):
     """
-    get:
-    Not Allowed
-
     post:
-    Create a comment instnace. Returns created comment data
+        Create a comment instnace. Returns created comment data
 
-    parameters:
-        author:
-            type: integer(id of current user),
-            required=True
-        parent:
-            type: id(post id),
-            required: True
-        body:
-            type: string,
-            required: True
+        parameters: [slug, body]
+
     """
 
     serializer_class = CommentCreateUpdateSerializer
@@ -151,10 +109,7 @@ class CreateCommentAPIView(APIView):
 class ListCommentAPIView(APIView):
     """
     get:
-    Returns the list of comments on a particular post
-
-    post:
-    Not Allowed
+        Returns the list of comments on a particular post
     """
 
     permission_classes = [IsAuthenticatedOrReadOnly]
@@ -169,24 +124,17 @@ class ListCommentAPIView(APIView):
 class DetailCommentAPIView(MultipleFieldLookupMixin, RetrieveUpdateDestroyAPIView):
     """
     get:
-    Returns the details of a comment instance. Searches comment using comment id and post slug in the url.
+        Returns the details of a comment instance. Searches comment using comment id and post slug in the url.
 
     put:
-    Updates an existing comment. Returns updated comment data
+        Updates an existing comment. Returns updated comment data
 
-        parameters:
-            parent:
-                type: integer(post id),
-                required=True
-            author:
-                type: integer(current user id),
-                required: True
-            body:
-                type: string,
-                required: True
+        parameters: [parent, author, body]
 
     delete:
-    Delete an existing comment
+        Delete an existing comment
+
+        parameters: [parent, author, body]
     """
 
     permission_classes = [IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]

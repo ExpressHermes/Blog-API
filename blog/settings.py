@@ -40,15 +40,15 @@ INSTALLED_APPS = [
     # rest framework
     "rest_framework",
     "rest_framework.authtoken",
-
     # documentation
     'drf_yasg',
-
+    # apps
     "accounts",
     "posts",
 ]
 
 LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/"
 
 REST_FRAMEWORK = {
     "DEFAULT_RENDERER_CLASSES": (

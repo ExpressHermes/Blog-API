@@ -1,6 +1,5 @@
 from django.contrib.auth import get_user_model
 from django.shortcuts import render
-
 from rest_framework.permissions import (
     AllowAny,
     IsAuthenticated,
@@ -13,80 +12,58 @@ from rest_framework.generics import (
     CreateAPIView,
     DestroyAPIView,
     ListAPIView,
-    UpdateAPIView,
-    RetrieveAPIView,
-    RetrieveUpdateAPIView,
+    ListCreateAPIView,
+    RetrieveUpdateDestroyAPIView,
 )
-
-from .serializers import UserSerializer, UserCreateSerializer, UserLoginSerializer
+from posts.permissions import IsOwnerOrReadOnly, IsOwner
+from .serializers import UserSerializer
 
 # Create your views here.
 
 User = get_user_model()
 
 
+class UserCreateAPIView(CreateAPIView):
+    """
+    post:
+        Create new user instance. Returns username, email of the created user.
+
+        parameters: [username, email, password]
+    """
+
+    permission_classes = [AllowAny]
+    serializer_class = UserSerializer
+
 class UserListAPIView(ListAPIView):
     """
     get:
-    Returns a list of all existing users
-
-    post:
-    Not Allowed
+        Returns list of all exisiting users
     """
 
-    permission_classes = [IsAuthenticated]
     queryset = User.objects.all()
+    permission_classes = [IsAuthenticated]
     serializer_class = UserSerializer
 
 
-class UserCreateAPIView(CreateAPIView):
+class UserDetailAPIView(RetrieveUpdateDestroyAPIView):
     """
     get:
-    Not Allowed
+        Returns the detail of a user instance
 
-    post:
-    Create new user instance. Returns username, email and token for the created user.
+        parameters: [id]
+    
+    put:
+        Update the detail of a user instance
 
-    parameters:
-        username:
-            type: string,
-            required: True
-        email:
-            type: email,
-            required: True
-        password:
-            type: string,
-            required: True
+        parameters: [id, username, email, password]
+    
+    delete:
+        Delete a user instance
+        
+        parameters: [id]
     """
 
-    permission_classes = [AllowAny]
-    serializer_class = UserCreateSerializer
-
-
-class UserLoginAPIView(APIView):
-    """
-    get:
-    Not Allowed
-
-    post:
-    Used to login on the browsable api
-
-    parameters:
-        username:
-            type: string,
-            required: True
-        password:
-            type: string,
-            required: True
-    """
-
-    permission_classes = [AllowAny]
-    serializer_class = UserLoginSerializer
-
-    def post(self, request, *args, **kwargs):
-        data = request.data
-        serializer = UserLoginSerializer(data=data)
-        if serializer.is_valid(raise_exception=True):
-            new_data = serializer.data
-            return Response(new_data, status=HTTP_200_OK)
-        return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
+    permission_classes = [IsAuthenticatedOrReadOnly, IsOwner]
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    lookup_field = 'id'
