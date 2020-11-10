@@ -11,20 +11,10 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class UserCreateSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(min_length=8, max_length=32, write_only=True)
     class Meta:
         model = User
         fields = ["username", "email", "password"]
-
-    extra_kwargs = {"password": {"write_only": True}}
-
-    def validate(self, data):
-        # ''' Email address must be unique '''
-
-        # email = data['email']
-        # user_qs = User.objects.filter(email=email)
-        # if user_qs.exists():
-        #     raise serializers.ValidationError("This user has already registered.")
-        return data
 
     def create(self, validated_data):
         username = validated_data["username"]
@@ -33,8 +23,7 @@ class UserCreateSerializer(serializers.ModelSerializer):
         user_obj = User(username=username, email=email)
         user_obj.set_password(password)
         user_obj.save()
-        return validated_data
-
+        return user_obj
 
 class UserLoginSerializer(serializers.ModelSerializer):
     token = serializers.CharField(allow_blank=True, read_only=True)
@@ -49,11 +38,10 @@ class UserLoginSerializer(serializers.ModelSerializer):
             "password",
         ]
 
-    extra_kwargs = {"password": {"write_only": True}}
+    extra_kwargs = {
+        "password": {"write_only": True}
+        }
 
     def validate(self, data):
-        # email = data['email']
-        # user_qs = User.objects.filter(email=email)
-        # if user_qs.exists():
-        #     raise ValidationError("This user has already registered.")
+
         return data

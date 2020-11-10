@@ -1,9 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.shortcuts import render
 
-from rest_framework.authtoken.views import ObtainAuthToken
-from rest_framework.authtoken.models import Token
-
 from rest_framework.permissions import (
     AllowAny,
     IsAuthenticated,
@@ -42,7 +39,7 @@ class UserListAPIView(ListAPIView):
     serializer_class = UserSerializer
 
 
-class UserCreateAPIView(APIView):
+class UserCreateAPIView(CreateAPIView):
     """
     get:
     Not Allowed
@@ -64,18 +61,6 @@ class UserCreateAPIView(APIView):
 
     permission_classes = [AllowAny]
     serializer_class = UserCreateSerializer
-
-    def post(self, request, format="json"):
-        serializer = UserSerializer(data=request.data)
-        if serializer.is_valid():
-            user = serializer.save()
-            if user:
-                token, created = Token.objects.get_or_create(user=user)
-                json = serializer.data
-                json["token"] = token.key
-                return Response(json, status=201)
-
-        return Response(serializer.errors, status=400)
 
 
 class UserLoginAPIView(APIView):

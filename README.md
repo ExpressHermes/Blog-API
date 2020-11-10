@@ -27,7 +27,7 @@ A REST API for blog built using Django Rest Framework
     pip install -r requirements.txt
     ```
 
-- Makeigrations and migrate the project
+- Makemigrations and migrate the project
     ```python
     python manage.py makemigrations && python manage.py migrate
     ```
@@ -56,7 +56,7 @@ Redoc UI docs:  `http://127.0.0.1:8000/redoc/`
 
 | Function 	| REQUEST 	| Endpoint 	| Authorization 	| data-object 	|
 |-	|-	|-	|-	|-	|
-| Create new user 	| GET 	| http://127.0.0.1:8000/user/register/ 	| Not Required 	| username: string,<br>email: email,<br>password: string 	|
+| Create new user 	| POST 	| http://127.0.0.1:8000/user/register/ 	| Not Required 	| username: string,<br>email: email,<br>password: string 	|
 | Returns list of all existing users 	| GET 	| http://127.0.0.1:8000/user/ 	| Basic Authorization 	|  	|
 |  	|  	|  	|  	|  	|
 | Returns a list of all existing posts 	| GET 	| http://127.0.0.1:8000/api/ 	| Not Required 	|  	|
