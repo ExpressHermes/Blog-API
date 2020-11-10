@@ -29,12 +29,39 @@ User = get_user_model()
 
 
 class UserListAPIView(ListAPIView):
+    """
+    get:
+    Returns a list of all existing users
+
+    post:
+    Not Allowed
+    """
+
     permission_classes = [IsAuthenticated]
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
 
 class UserCreateAPIView(APIView):
+    """
+    get:
+    Not Allowed
+
+    post:
+    Create new user instance. Returns username, email and token for the created user.
+
+    parameters:
+        username:
+            type: string,
+            required: True
+        email:
+            type: email,
+            required: True
+        password:
+            type: string,
+            required: True
+    """
+
     permission_classes = [AllowAny]
     serializer_class = UserCreateSerializer
 
@@ -52,6 +79,22 @@ class UserCreateAPIView(APIView):
 
 
 class UserLoginAPIView(APIView):
+    """
+    get:
+    Not Allowed
+    
+    post:
+    Used to login on the browsable api
+
+    parameters:
+        username:
+            type: string,
+            required: True
+        password:
+            type: string,
+            required: True
+    """
+
     permission_classes = [AllowAny]
     serializer_class = UserLoginSerializer
 

@@ -14,7 +14,7 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-TEMPLATES_DIR = BASE_DIR / "templates"
+# TEMPLATES_DIR = BASE_DIR / "templates"
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -37,10 +37,15 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # rest framework
     "rest_framework",
+    "rest_framework.authtoken",
+
+    # documentation
+    'drf_yasg',
+
     "accounts",
     "posts",
-    "rest_framework.authtoken",
 ]
 
 LOGIN_REDIRECT_URL = "/"
@@ -60,6 +65,10 @@ REST_FRAMEWORK = {
     ),
 }
 
+# SWAGGER_SETTINGS = {
+#     'VALIDATOR_URL': 'http://localhost:8000',
+# }
+
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -76,7 +85,7 @@ ROOT_URLCONF = "blog.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [TEMPLATES_DIR],
+        "DIRS": [],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
