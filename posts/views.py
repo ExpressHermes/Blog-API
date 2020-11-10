@@ -63,7 +63,7 @@ class CreatePostAPIView(APIView):
     def post(self, request, *args, **kwargs):
         serializer = PostCreateUpdateSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
-            serializer.save()
+            serializer.save(author=request.user)
             return Response(serializer.data, status=200)
         else:
             return Response({"errors": serializer.errors}, status=400)
@@ -93,7 +93,7 @@ class DetailPostAPIView(RetrieveUpdateDestroyAPIView):
 
         parameters:
             author:
-                type: integer(id of current user),
+                type: integer(id of user),
                 required=True
             title:
                 type: string,
@@ -138,10 +138,11 @@ class CreateCommentAPIView(APIView):
     serializer_class = CommentCreateUpdateSerializer
     permission_classes = [IsAuthenticated]
 
-    def post(self, request, *args, **kwargs):
+    def post(self, request, slug, *args, **kwargs):
+        post = get_object_or_404(Post, slug=slug)
         serializer = CommentCreateUpdateSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
-            serializer.save()
+            serializer.save(author=request.user, parent=post)
             return Response(serializer.data, status=200)
         else:
             return Response({"errors": serializer.errors}, status=400)
@@ -192,4 +193,4 @@ class DetailCommentAPIView(MultipleFieldLookupMixin, RetrieveUpdateDestroyAPIVie
 
     queryset = Comment.objects.all()
     lookup_fields = ["parent", "id"]
-    serializer_class = CommentSerializer
+    serializer_class = CommentCreateUpdateSerializer

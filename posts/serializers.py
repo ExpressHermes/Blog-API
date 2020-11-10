@@ -1,12 +1,13 @@
+from django.contrib.auth import get_user_model
 from rest_framework import serializers
 from .models import Post, Comment
 
+User = get_user_model()
 
 class PostCreateUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
         fields = [
-            "author",
             "title",
             "description",
             "body",
@@ -49,6 +50,7 @@ class PostListSerializer(serializers.ModelSerializer):
 
 
 class PostDetailSerializer(serializers.ModelSerializer):
+    author = serializers.PrimaryKeyRelatedField(read_only=True)
     comments = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
@@ -91,7 +93,5 @@ class CommentCreateUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
         fields = [
-            "parent",
-            "author",
             "body",
         ]
