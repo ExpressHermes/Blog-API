@@ -111,9 +111,9 @@ Brief explanation of endpoints:
 | Updates an existing post. Returns updated post data                                                    | PUT, PATCH | http://127.0.0.1:8000/posts/{str:slug}/                 | Basic Auth    | title, body, description, image: optional |
 | Deletes the existing post                                                                              | DELETE     | http://127.0.0.1:8000/posts/{str:slug}/                 | Basic Auth    |                                           |
 | Returns the list of comments on a particular post                                                      | GET        | http://127.0.0.1:8000/posts/{str:slug}/comment/         | Not Required  |                                           |
-| Create a comment instnace. Returns created comment data                                                | POST       | http://127.0.0.1:8000/posts/{str:slug}/comment/create   | Basic Auth    | body: comment body                        |
-| Returns the details of a comment instance. Searches comment using comment id and post slug in the url. | GET        | http://127.0.0.1:8000/posts/{str:slug}/comment/{int:id} | Not Required  |                                           |
-| Updates an existing comment. Returns updated comment data                                              | PUT, PATCH | http://127.0.0.1:8000/posts/{str:slug}/comment/{int:id} | Basic Auth    | body: comment body                        |
-| Deletes an existing comment                                                                            | DELETE     | http://127.0.0.1:8000/posts/{str:slug}/comment/{int:id} | Basic Auth    | body: comment body                        |
+| Create a comment instnace. Returns created comment data                                                | POST       | http://127.0.0.1:8000/posts/{str:slug}/comment/create/   | Basic Auth    | body: comment body                        |
+| Returns the details of a comment instance. Searches comment using comment id and post slug in the url. | GET        | http://127.0.0.1:8000/posts/{str:slug}/comment/{int:id}/ | Not Required  |                                           |
+| Updates an existing comment. Returns updated comment data                                              | PUT, PATCH | http://127.0.0.1:8000/posts/{str:slug}/comment/{int:id}/ | Basic Auth    | body: comment body                        |
+| Deletes an existing comment                                                                            | DELETE     | http://127.0.0.1:8000/posts/{str:slug}/comment/{int:id}/ | Basic Auth    | body: comment body                        |
 
 
