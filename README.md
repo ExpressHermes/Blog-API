@@ -51,6 +51,8 @@ Swagger UI docs:    http://127.0.0.1:8000/swagger/
 
 Redoc UI docs:  http://127.0.0.1:8000/redoc/
 
+While working with api in browser, you can login using `http://127.0.0.1:8000/api-auth/` link.
+
 
 ## API Endpoints
 
