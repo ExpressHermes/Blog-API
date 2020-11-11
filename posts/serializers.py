@@ -1,3 +1,5 @@
+import os
+from django.conf import settings
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
 from .models import Post, Comment
@@ -11,6 +13,7 @@ class PostCreateUpdateSerializer(serializers.ModelSerializer):
             "title",
             "description",
             "body",
+            "image"
         ]
 
     def validate_title(self, value):
@@ -23,6 +26,12 @@ class PostCreateUpdateSerializer(serializers.ModelSerializer):
             return serializers.ValidationError(
                 "Max description length is 200 characters"
             )
+        return value
+    
+    def clean_image(self, value):
+        initial_path = value.path
+        new_path = settings.MEDIA_ROOT + value.name
+        os.rename(initial_path, new_path)
         return value
 
 
@@ -37,6 +46,7 @@ class PostListSerializer(serializers.ModelSerializer):
             "url",
             "title",
             "author",
+            "image",
             "description",
             "comments",
         ]
@@ -63,6 +73,7 @@ class PostDetailSerializer(serializers.ModelSerializer):
             "description",
             "body",
             "author",
+            "image",
             "created_at",
             "updated_at",
             "comments",

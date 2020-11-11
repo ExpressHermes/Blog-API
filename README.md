@@ -28,17 +28,17 @@ A REST API for blog built using Django Rest Framework
     ```
 
 - Makemigrations and migrate the project
-    ```python
+    ```
     python manage.py makemigrations && python manage.py migrate
     ```
 
 - Create a superuser
-    ```python
+    ```
     python manage.py createsuperuser
     ```
 
 - Runserver
-    ```python
+    ```
     python manage.py runserver
     ```
 
