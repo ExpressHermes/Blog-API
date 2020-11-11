@@ -28,21 +28,21 @@ A REST API for blog built using Django Rest Framework
     ```
 
 - Makemigrations and migrate the project
-    ```python
+    ```
     python manage.py makemigrations && python manage.py migrate
     ```
 
 - Create a superuser
-    ```python
+    ```
     python manage.py createsuperuser
     ```
 
 - Runserver
-    ```python
+    ```
     python manage.py runserver
     ```
 
-**Note: After running the server, you can use the api inside browser or you can use Postman to make api calls. Make sure in each api call, you provide username, password or token obtained by creating a user.**
+**Note: After running the server, you can use the api inside browser or you can use Postman to make api calls. Make sure in each api call, you provide username, password by creating a user.**
 
 # RESTAPI Docs
 I have added `drf-yasg` for API documentation which can be accessed after running the server and going to following links:
@@ -51,27 +51,29 @@ Swagger UI docs:    http://127.0.0.1:8000/swagger/
 
 Redoc UI docs:  http://127.0.0.1:8000/redoc/
 
+While working with api in browser, you can login using `http://127.0.0.1:8000/api-auth/` link.
+
 
 ## API Endpoints
 
 Brief explanation of endpoints:
 
-| Function                                                                                               | REQUEST    | Endpoint                                                | Authorization       | parameters                                                                                            |  |
-|--------------------------------------------------------------------------------------------------------|------------|---------------------------------------------------------|---------------------|-------------------------------------------------------------------------------------------------------|--|
-| Create new user                                                                                        | POST       | http://127.0.0.1:8000/user/register/                    | Not Required        | username: string,<br> email: email,<br> password: string                                              |  |
-| Returns list of all existing users                                                                     | GET        | http://127.0.0.1:8000/user/                             | Basic Authorization |                                                                                                       |  |
-| Returns the detail of a user instance                                                                  | GET        | http://127.0.0.1:8000/user/<int:id>/                    | Basic Authorization | id: integer                                                                                           |  |
-| Update the detail of a user instance                                                                   | PUT, PATCH | http://127.0.0.1:8000/user/<int:id>/                    | Basic Authorization | id: integer                                                                                           |  |
-| Delete an user instance                                                                                | DELETE     | http://127.0.0.1:8000/user/<int:id>/                    | Basic Authorization | id: integer                                                                                           |  |
-|                                                                                                        |            |                                                         |                     |                                                                                                       |  |
-| Returns a list of all existing posts                                                                   | GET        | http://127.0.0.1:8000/posts/                            | Not Required        |                                                                                                       |  |
-| Creates a new post instance. Returns created post data                                                 | POST       | http://127.0.0.1:8000/posts/create_post/                | Basic Authorization | parameters: [title, body, description]                                             |  |
-| Returns the details of a post instance. Searches post using slug field.                                | GET        | http://127.0.0.1:8000/posts/{str:slug}/                 | Basic Authorization | slug: string,<br>title: string,<br>description: string,<br>body: string, |  |
-| Updates an existing post. Returns updated post data                                                    | PUT, PATCH | http://127.0.0.1:8000/posts/{str:slug}/                 | Basic Authorization | parameters: [slug, title, body, description] |  |
-| Deletes the existing post                                                                              | DELETE     | http://127.0.0.1:8000/posts/{str:slug}/                 | Basic Authorization |parameters: [slug, ]                                                                                          |  |
-| Returns the list of comments on a particular post                                                      | GET        | http://127.0.0.1:8000/posts/{str:slug}/comment/         | Not Required        | slug: string                                                                                          |  |
-| Create a comment instnace. Returns created comment data                                                | POST       | http://127.0.0.1:8000/posts/{str:slug}/comment/create   | Basic Authorization | parameters: [slug, body]                                                                        |  |
-| Returns the details of a comment instance. Searches comment using comment id and post slug in the url. | GET        | http://127.0.0.1:8000/posts/{str:slug}/comment/{int:id} | Not Required        | slug: string,<br>id: integer(comment id)                                                              |  |
-| Updates an existing comment. Returns updated comment data                                              | PUT, PATCH | http://127.0.0.1:8000/posts/{str:slug}/comment/{int:id} | Basic Authorization | parameters: [parent, author, body]                                            |  |
-| Deletes an existing comment                                                                            | DELETE     | http://127.0.0.1:8000/posts/{str:slug}/comment/{int:id} | Basic               | parameters: [parent, author, body]                                                              |  |
-                                                                                   
+| Function                                                                                               | REQUEST    | Endpoint                                                | Authorization | form-data                                 |
+|--------------------------------------------------------------------------------------------------------|------------|---------------------------------------------------------|---------------|-------------------------------------------|
+| Create new user                                                                                        | POST       | http://127.0.0.1:8000/user/register/                    | Not Required  | username, email, password                 |
+| Returns list of all existing users                                                                     | GET        | http://127.0.0.1:8000/user/                             | Basic Auth    |                                           |
+| Returns the detail of an user instance                                                                  | GET        | http://127.0.0.1:8000/user/{int:id}/                    | Basic Auth    |                                           |
+| Update the detail of an user instance                                                                   | PUT, PATCH | http://127.0.0.1:8000/user/{int:id}/                    | Basic Auth    |                                           |
+| Delete an user instance                                                                                | DELETE     | http://127.0.0.1:8000/user/{int:id}/                    | Basic Auth    |                                           |
+|                                                                                                        |            |                                                         |               |                                           |
+| Returns a list of all existing posts                                                                   | GET        | http://127.0.0.1:8000/posts/                            | Not Required  |                                           |
+| Creates a new post instance. Returns created post data                                                 | POST       | http://127.0.0.1:8000/posts/create_post/                | Basic Auth    | title, body, description, image: optional |
+| Returns the details of a post instance. Searches post using slug field.                                | GET        | http://127.0.0.1:8000/posts/{str:slug}/                 | Basic Auth    |                                           |
+| Updates an existing post. Returns updated post data                                                    | PUT, PATCH | http://127.0.0.1:8000/posts/{str:slug}/                 | Basic Auth    | title, body, description, image: optional |
+| Deletes the existing post                                                                              | DELETE     | http://127.0.0.1:8000/posts/{str:slug}/                 | Basic Auth    |                                           |
+| Returns the list of comments on a particular post                                                      | GET        | http://127.0.0.1:8000/posts/{str:slug}/comment/         | Not Required  |                                           |
+| Create a comment instnace. Returns created comment data                                                | POST       | http://127.0.0.1:8000/posts/{str:slug}/comment/create   | Basic Auth    | body                                      |
+| Returns the details of a comment instance. Searches comment using comment id and post slug in the url. | GET        | http://127.0.0.1:8000/posts/{str:slug}/comment/{int:id} | Not Required  |                                           |
+| Updates an existing comment. Returns updated comment data                                              | PUT, PATCH | http://127.0.0.1:8000/posts/{str:slug}/comment/{int:id} | Basic Auth    | body                                      |
+| Deletes an existing comment                                                                            | DELETE     | http://127.0.0.1:8000/posts/{str:slug}/comment/{int:id} | Basic Auth    | body                                      |
+

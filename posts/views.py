@@ -33,7 +33,7 @@ class CreatePostAPIView(APIView):
     post:
         Creates a new post instance. Returns created post data
 
-        parameters: [title, body, description]
+        parameters: [title, body, description, image]
     """
 
     queryset = Post.objects.all()
@@ -70,7 +70,7 @@ class DetailPostAPIView(RetrieveUpdateDestroyAPIView):
     put:
         Updates an existing post. Returns updated post data
 
-        parameters: [slug, title, body, description]
+        parameters: [slug, title, body, description, image]
 
     delete:
         Delete an existing post
