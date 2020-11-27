@@ -1,4 +1,6 @@
 # Blog API
+[![Gitter](https://badges.gitter.im/ExpressHermesOSC/Blog-App.svg)](https://gitter.im/ExpressHermesOSC/Blog-App?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+
 A REST API for blog built using Django Rest Framework
 
 ## Installation
