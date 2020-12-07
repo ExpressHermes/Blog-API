@@ -21,8 +21,13 @@ A blog app built with django api for backend and reactjs for frontend.
 
 ## Contribution
 - Fork and clone the repo.  
-    ```bash
-    git clone https://github.com/ExpressHermes/Blog-API.git
+- To avoid merge conflicts, make sure to set upstream in your git.
+    ```
+    git remote add upstream https://github.com/ExpressHermes/Blog-API.git
+    ```
+- Whenever you want to pull changes from main repo, run:
+    ```
+    git pull upstream master
     ```
 - Create your feature branch
     ```
