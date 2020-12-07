@@ -27,7 +27,7 @@ A blog app built with django api for backend and reactjs for frontend.
     ```
 - Whenever you want to pull changes from main repo, run:
     ```
-    git pull upstream master
+    git pull upstream main
     ```
 - Create your feature branch
     ```
