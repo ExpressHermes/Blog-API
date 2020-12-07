@@ -1,121 +1,46 @@
-# Blog API
+# Blog App
 [![Gitter](https://badges.gitter.im/ExpressHermesOSC/Blog-App.svg)](https://gitter.im/ExpressHermesOSC/Blog-App?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
-A REST API for blog built using Django Rest Framework
+A blog app built with django api for backend and reactjs for frontend.
 
-## Installation
-
-### Requirements
+## Requirements
+### For backend
 - Python
 - Django
 
-    Complete list available in requirements.txt file
+### For backend
+- Yarn
+- React
 
-### Quickstart
-- Clone the repo.  
+
+## Frontend
+    Open frontend folder for reactjs and project frontend.
+
+## Backend API
+    Open backend folder README for installation and instructions for Django API.
+
+## Contribution
+- Fork and clone the repo.  
     ```bash
     git clone https://github.com/ExpressHermes/Blog-API.git
     ```
-
-- Inside the repo folder, make a virtual environment and activate it 
-    ```bash
-    cd Blog-API
-    python -m venv env 
-    source env/bin/activate
+- Create your feature branch
+    ```
+    git checkout -b <feature-name>
+    ```
+- Commit your changes
+    ```
+    git commit -am "Meaningful commit message"
+    ```
+- Push to the branch
+    ```
+    git push origin <feature-name>
     ```
 
-- Install requirements from requirements.txt
-    ```
-    pip install -r requirements.txt
-    ```
-
-- Makemigrations and migrate the project
-    ```
-    python manage.py makemigrations && python manage.py migrate
-    ```
-
-- Create a superuser
-    ```
-    python manage.py createsuperuser
-    ```
-
-- Runserver
-    ```
-    python manage.py runserver
-    ```
-
-**Note: After running the server, you can use the api inside browser or you can use Postman to make api calls. Make sure in each api call, you provide username, password by creating a user.**
-
-# RESTAPI Docs
-I have added `drf-yasg` for API documentation which can be accessed after running the server and going to following links:
-
-Swagger UI docs:    http://127.0.0.1:8000/swagger/
-
-Redoc UI docs:  http://127.0.0.1:8000/redoc/
-
-While working with api in browser, you can login using `http://127.0.0.1:8000/api-auth/` link.
+- If you see any bug or you have a feature suggestion, create an issue.
+- Start working on an issue only after it has been approved by the maintainer.
+- Wait till the end of the day to get the reply on an issue or review of a PR.
 
 
-## API
-<details>
-<summary> User model </summary> 
-
-- User:
-    - username: string(unique),
-    - email: email,
-    - password: string(min 8 chars)
-
-</details>
-
-<details>
-<summary> Post Model </summary>
-
-- Post:
-    - id: Post id(read only),
-    - slug: string,
-    - title: string,
-    - author: user-id(read only),
-    - body: string,
-    - description: string,
-    - image: image(optional)
-    - created_at: datetime(read only)
-    - updated_at: datetime(read only)
-</details>
-
-<details>
-<summary>Comment Model </summary>
-
-- Comment:
-    - parent: post id(read only),
-    - author: user id(ready only),
-    - body: string,
-    - created_at: datetime(read only)
-    - updated_at: datetime(read only)
-</details>
-
-
-
-### Endpoints
-
-Brief explanation of endpoints:
-
-| Function                                                                                               | REQUEST    | Endpoint                                                | Authorization | form-data                                 |
-|--------------------------------------------------------------------------------------------------------|------------|---------------------------------------------------------|---------------|-------------------------------------------|
-| Create new user                                                                                        | POST       | http://127.0.0.1:8000/user/register/                    | Not Required  | username, email, password                 |
-| Returns list of all existing users                                                                     | GET        | http://127.0.0.1:8000/user/                             | Basic Auth    |                                           |
-| Returns the detail of an user instance                                                                 | GET        | http://127.0.0.1:8000/user/{int:id}/                    | Basic Auth    |                                           |
-| Update the detail of an user instance                                                                  | PUT, PATCH | http://127.0.0.1:8000/user/{int:id}/                    | Basic Auth    |                                           |
-| Delete an user instance                                                                                | DELETE     | http://127.0.0.1:8000/user/{int:id}/                    | Basic Auth    |                                           |
-|                                                                                                        |            |                                                         |               |                                           |
-| Returns a list of all existing posts                                                                   | GET        | http://127.0.0.1:8000/posts/                            | Not Required  |                                           |
-| Creates a new post instance. Returns created post data                                                 | POST       | http://127.0.0.1:8000/posts/create/                | Basic Auth    | title, body, description, image: optional |
-| Returns the details of a post instance. Searches post using slug field.                                | GET        | http://127.0.0.1:8000/posts/{str:slug}/                 | Basic Auth    |                                           |
-| Updates an existing post. Returns updated post data                                                    | PUT, PATCH | http://127.0.0.1:8000/posts/{str:slug}/                 | Basic Auth    | title, body, description, image: optional |
-| Deletes the existing post                                                                              | DELETE     | http://127.0.0.1:8000/posts/{str:slug}/                 | Basic Auth    |                                           |
-| Returns the list of comments on a particular post                                                      | GET        | http://127.0.0.1:8000/posts/{str:slug}/comment/         | Not Required  |                                           |
-| Create a comment instnace. Returns created comment data                                                | POST       | http://127.0.0.1:8000/posts/{str:slug}/comment/create/   | Basic Auth    | body: comment body                        |
-| Returns the details of a comment instance. Searches comment using comment id and post slug in the url. | GET        | http://127.0.0.1:8000/posts/{str:slug}/comment/{int:id}/ | Not Required  |                                           |
-| Updates an existing comment. Returns updated comment data                                              | PUT, PATCH | http://127.0.0.1:8000/posts/{str:slug}/comment/{int:id}/ | Basic Auth    | body: comment body                        |
-| Deletes an existing comment                                                                            | DELETE     | http://127.0.0.1:8000/posts/{str:slug}/comment/{int:id}/ | Basic Auth    | body: comment body                        |
 
 
