@@ -1,0 +1,15 @@
+.toolBar{
+	height: 80px;
+	padding: 5px 20px;
+	box-sizing: border-box;
+	border-bottom: 2px solid black;
+	background-color: #eee;
+}
+
+.logo{
+	height: calc(100% - 4px);
+	display: inline-block;
+	width: fit-content;
+	margin: 0 0;
+	border: 2px solid black;
+}

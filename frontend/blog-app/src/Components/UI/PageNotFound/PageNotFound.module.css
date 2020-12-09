@@ -1,0 +1,33 @@
+.external{
+	padding: 100px 0;
+}
+
+.notFound{
+	width: 90%;
+	background-color: #eee;
+	margin: 0px auto;
+	padding: 50px 0;
+}
+
+.qMark{
+	color: #bbb;
+	text-align: center;
+	font-size: 200px;
+}
+
+.notFoundMsg{
+	color: #777;
+	text-align: center;
+}
+
+.notFoundLink a{
+	color: rgb(4, 28, 82);
+	display: inline-block;
+	text-decoration: none;
+	padding: 10px;
+}
+
+.notFoundLink a:hover{
+	color: rgb(39, 56, 95);
+	text-decoration: underline;
+}
