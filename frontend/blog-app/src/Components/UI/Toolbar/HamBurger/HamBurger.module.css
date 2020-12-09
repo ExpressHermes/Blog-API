@@ -1,0 +1,26 @@
+.Burger{
+	height: 40px;
+	margin: 13.5px 0;
+	float: right;
+	width: 45px;
+	cursor: pointer;
+ }
+ 
+ .Burger:focus{
+	outline: none;
+ }
+ 
+ .bar{
+	width: 80%;
+	height: 4px;
+	margin: 4.2px;
+	background-color: rgb(219, 219, 219);
+	border: 1px solid rgb(231, 231, 231);
+	border-radius: 5px;
+ }
+ 
+ @media screen and (min-width:900px){
+	.Burger{
+	   display: none;
+	}
+ }

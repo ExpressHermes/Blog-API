@@ -1,5 +1,10 @@
 .navBar{
     width: fit-content;
     float: right;
-	line-height: 70px;
+}
+
+@media screen and (max-width: 900px){
+   .navBar{
+      display: none;
+   }
 }

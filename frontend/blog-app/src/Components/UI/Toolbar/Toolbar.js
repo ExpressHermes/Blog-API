@@ -1,17 +1,57 @@
+import React from 'react';
 import Navigation from './Navigation/Navigation';
 import Wrap from '../../../hoc/Wrap/Wrap';
+import HamBurger from './HamBurger/HamBurger';
+import Backdrop from '../Backdrop/Backdrop';
+import SideDrawer from '../SideDrawer/SideDrawer';
 
 import classes from './Toolbar.module.css';
 
-const toolbar = () => {
-    return(
-        <Wrap>
-            <div className={classes["toolBar"]}>
-                <div className={classes["logo"]}>Place Logo. Keep <br/>height of it 100%.</div>
-                <Navigation/>
-            </div>
-        </Wrap>
-    )
+class ToolBar extends React.Component{
+    state = {
+        isOpened: false
+    };
+    render(){
+
+        return(
+            <Wrap>
+                <div className={classes["toolBar"]}>
+                    <div className={classes["logo"]}>Place Logo. Keep <br/>height of it 100%.</div>
+                    <Navigation/>
+                    <HamBurger 
+                        status={this.state.isOpened}
+                        clicked={() => {
+                            this.setState((prevState) => {
+                                return {
+                                    isOpened: !prevState.isOpened,
+                                };
+                            });
+                        }}
+                    />
+                    <Backdrop 
+                        show={this.state.isOpened}
+                        clicked={() => {
+                           this.setState((prevState) => {
+                              return {
+                                 isOpened: false,
+                              };
+                           });
+                        }}    
+                    />
+                    <SideDrawer
+                        isOpened={this.state.isOpened}
+                        hide={() => {
+                            this.setState((prevState) => {
+                                return {
+                                    isOpened: false,
+                                };
+                            });
+                        }}
+                    />
+                </div>
+            </Wrap>
+        )
+    }
 }
 
-export default toolbar;
+export default ToolBar;
