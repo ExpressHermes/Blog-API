@@ -1,0 +1,16 @@
+.toolBar{
+	height: 70px;
+	padding: 3px 20px;
+	box-sizing: border-box;
+	border-bottom: 2px solid black;
+	background-color:rgb(6, 29, 44);
+	color: #eee;
+}
+
+.logo{
+	height: calc(100% - 4px);
+	display: inline-block;
+	width: fit-content;
+	margin: 0 0;
+	border: 2px solid white;
+}

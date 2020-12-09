@@ -1,0 +1,10 @@
+.SideDrawer{
+	position: fixed;
+	right: 0;
+	top: 0;
+	height: 100vh;
+	width: 80%;
+	max-width: 500px;
+	z-index: 1000;
+	transition: 0.4s all ease-in-out;
+ }
