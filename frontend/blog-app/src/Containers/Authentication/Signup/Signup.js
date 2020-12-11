@@ -2,13 +2,27 @@ import React from 'react';
 
 import Wrap from '../../../hoc/Wrap/Wrap';
 import classes from '../Auth.module.css';
+import PasswordShowHide from '../../../Components/UI/PasswordShowHide/PasswordShowHide';
 
 import {Link} from 'react-router-dom';
 
 class SignUp extends React.Component{
 
+	state = {
+		password : '',
+		rePassword : ''
+	}
+
 	componentDidMount(){
 		document.title = "Create Account - Blog App"
+	}
+
+	getData = (key,val) => {
+		this.setState((prevState) => ({
+				...prevState,
+				[key] : val
+			})
+		)
 	}
 
 	render(){
@@ -33,9 +47,18 @@ class SignUp extends React.Component{
 							if(e.currentTarget.value.length === 0)
 								e.currentTarget.type='text'
 						}}/>
+						
+						<PasswordShowHide
+							valueKey = "password"
+							senddata = {this.getData} 
+							placeholder = "Enter Password"
+						/>
+						<PasswordShowHide
+							valueKey = "rePassword"
+							senddata = {this.getData} 
+							placeholder = "Re-enter Password"
+						/>
 
-						<input type="password" placeholder="Create Password (Min 6 chars)" className={classes["input"]}/>
-						<input type="password" placeholder="Re-enter Password" className={classes["input"]}/>
 						<div className={classes["accept"]}>
 							<input type="checkbox" id="acceptBox"/> 
 							<label for="acceptBox">

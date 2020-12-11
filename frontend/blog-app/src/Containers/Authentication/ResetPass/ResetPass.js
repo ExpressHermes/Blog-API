@@ -2,13 +2,27 @@ import React from 'react';
 
 import Wrap from '../../../hoc/Wrap/Wrap';
 import classes from '../Auth.module.css';
+import PasswordShowHide from '../../../Components/UI/PasswordShowHide/PasswordShowHide';
 
 import {Link} from 'react-router-dom';
 
 class ResetPass extends React.Component{
 
+	state = {
+		password : '',
+		rePassword : ''
+	}
+
 	componentDidMount(){
 		document.title = "Sign In - Blog App"
+	}
+
+	getData = (key,val) => {
+		this.setState((prevState) => ({
+				...prevState,
+				[key] : val
+			})
+		)
 	}
 
 	render(){
@@ -41,8 +55,16 @@ class ResetPass extends React.Component{
 						</div>
 						<hr/>
 						
-						<input type="password" placeholder="New Password (Min 6 chars)" className={classes["input"]}/>
-						<input type="password" placeholder="Re-enter Password" className={classes["input"]}/>
+						<PasswordShowHide
+							valueKey = "password"
+							senddata = {this.getData} 
+							placeholder = "Enter Password"
+						/>
+						<PasswordShowHide
+							valueKey = "rePassword"
+							senddata = {this.getData} 
+							placeholder = "Re-enter Password"
+						/>
 
 						<button className={classes["signin"]}>Submit</button>
 						<button className={classes["cancel"]}>Cancel</button>

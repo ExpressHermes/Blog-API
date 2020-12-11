@@ -3,13 +3,27 @@ import React from 'react';
 import Wrap from '../../../hoc/Wrap/Wrap';
 import classes from '../Auth.module.css';
 
+import PasswordShowHide from '../../../Components/UI/PasswordShowHide/PasswordShowHide';
+
 import {Link} from 'react-router-dom';
 
 class Signin extends React.Component{
-	
+
+	state = {
+		password : ''
+	}
+
 	componentDidMount(){
 		document.title = "Sign In - Blog App"
 	}  
+
+	getData = (key,val) => {
+		this.setState((prevState) => ({
+				...prevState,
+				[key] : val
+			})
+		)
+	}
 
 	render(){
 		return(
@@ -28,7 +42,12 @@ class Signin extends React.Component{
 						<hr/>
 						<input type="text" placeholder="Username" className={classes["input"]}/>
 
-						<input type="password" placeholder="Password (Min 6 chars)" className={classes["input"]}/>
+						<PasswordShowHide 
+							valueKey = "password"
+							senddata = {this.getData} 
+							placeholder = "Password (Min 6 Chars)"
+						/>
+
 						<div className={classes["forgotMsg"]}>
 							<Link to="/forgotPass">Forgot Password?</Link>
 						</div>
