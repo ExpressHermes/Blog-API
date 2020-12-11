@@ -22,7 +22,6 @@
 	width: 90%;
 	max-width: 460px;
 	box-sizing: border-box;
-	color: rgb(87, 87, 87);
 }
 
 .wel_quote{
@@ -40,18 +39,12 @@
 	border-bottom: 2px solid grey;
 	display: block;
 	text-align: left;
-	color: unset;
 }
 
 .input:focus{
 	outline: none;
 	background-color: #e9f1ff;
 	border-color: rgb(44, 119, 216);
-}
-
-.InValid{
-	background-color: #ffe9e9;
-	border-color: rgb(216, 44, 44);
 }
 
 button{
@@ -79,24 +72,6 @@ button.signin:focus, button.signin:hover{
 	background-color: #4baa66;
 }
 
-button.cancel{
-	background-color: #bbbbbb;
-	color: rgb(39, 39, 39);
-	display: block;
-	width: 90%;
-	max-width: 400px;
-	padding: 5px;
-	margin: 10px auto;
-	border-radius: 15px;
-	height: 40px;
-	font-size: 18px;
-}
-
-button.cancel:focus, button.cancel:hover{
-	outline: none;
-	background-color: #afafaf;
-}
-
 .newToAppMsg, .forgotMsg{
 	font-size: 18px;
 	color: rgb(105, 105, 105);
@@ -112,19 +87,4 @@ button.cancel:focus, button.cancel:hover{
 }
 .newToAppMsg a:hover,.forgotMsg a:hover{
 	color: rgb(69, 136, 190);
-}
-
-.bold{
-	display: inline-block;
-	margin-left: 5px;
-}
-
-label{
-	color: rgb(87, 87, 87);
-	font-size: 18px;
-	margin: 0 5px;
-}
-
-.accept{
-	display: block;
 }
