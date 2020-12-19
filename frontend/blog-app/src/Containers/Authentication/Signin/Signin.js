@@ -22,18 +22,6 @@ class Signin extends React.Component{
 		this.setState({ [key] : e.target.value});
 	}
 
-	componentDidMount(){
-		document.title = "Sign In - Blog App"
-	}  
-
-	getData = (key,val) => {
-		this.setState((prevState) => ({
-				...prevState,
-				[key] : val
-			})
-		)
-	}
-
 	handleSubmit = (e) => {
 		this.loading = true;
 		var data = {
@@ -51,12 +39,25 @@ class Signin extends React.Component{
 		.then((json) => {
 			console.log(json);
 			this.loading = false;
+			// Redirect to dashboard
 		})
 		.catch((err) => {
 			console.log(err);
 			this.error = err;
 			this.loading = false;
 		})
+	}
+
+	componentDidMount(){
+		document.title = "Sign In - Blog App"
+	}  
+
+	getData = (key,val) => {
+		this.setState((prevState) => ({
+				...prevState,
+				[key] : val
+			})
+		)
 	}
 
 	render(){
