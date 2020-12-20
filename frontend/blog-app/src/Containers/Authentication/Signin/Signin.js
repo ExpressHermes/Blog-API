@@ -10,7 +10,42 @@ import {Link} from 'react-router-dom';
 class Signin extends React.Component{
 
 	state = {
+		username : '',
 		password : ''
+	}
+
+	error = null;
+	loading = false;
+
+	handleFormChange = (e) => {
+		var key = e.target.name;
+		this.setState({ [key] : e.target.value});
+	}
+
+	handleSubmit = (e) => {
+		this.loading = true;
+		var data = {
+			"username" : this.state.username,
+			"password" : this.state.password
+		}
+		fetch("http://127.0.0.1:8000/api-auth/login/",{
+			method : "POST",
+			headers : {
+				"Content-Type": "application/json",
+			},
+			body : JSON.stringify(data),
+		})
+		.then((res) => res.json() )
+		.then((json) => {
+			console.log(json);
+			this.loading = false;
+			// Redirect to dashboard
+		})
+		.catch((err) => {
+			console.log(err);
+			this.error = err;
+			this.loading = false;
+		})
 	}
 
 	componentDidMount(){
@@ -26,6 +61,7 @@ class Signin extends React.Component{
 	}
 
 	render(){
+		console.log(this.state);
 		return(
 			<Wrap>
 				<div className={classes["brandMsg"]}>
@@ -40,7 +76,7 @@ class Signin extends React.Component{
 							Signin to start writing and enter a new world of Blogs
 						</div>
 						<hr/>
-						<input type="text" placeholder="Username" className={classes["input"]}/>
+						<input name="username" type="text" value={this.state.username} placeholder="Username" className={classes["input"]} onChange= { this.handleFormChange } />
 
 						<PasswordShowHide 
 							valueKey = "password"
@@ -51,7 +87,7 @@ class Signin extends React.Component{
 						<div className={classes["forgotMsg"]}>
 							<Link to="/forgotPass">Forgot Password?</Link>
 						</div>
-						<button className={classes["signin"]}>Sign In</button>
+						<button className={classes["signin"]} onClick={this.handleSubmit} >Sign In</button>
 					</div>
 					
 					<div className={classes["newToAppMsg"]}>

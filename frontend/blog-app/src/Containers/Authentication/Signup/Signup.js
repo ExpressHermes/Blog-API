@@ -58,6 +58,11 @@ class SignUp extends React.Component{
 				console.log("Success");
 				this.loading = false;
 			})
+			.catch((err) => {
+				console.log(err);
+				this.error = err;
+				this.loading = false;
+			})
 			
 		}
 		else{

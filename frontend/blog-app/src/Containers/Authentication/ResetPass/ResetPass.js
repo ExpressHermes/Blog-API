@@ -9,6 +9,7 @@ import {Link} from 'react-router-dom';
 class ResetPass extends React.Component{
 
 	state = {
+		email : '',
 		password : '',
 		rePassword : ''
 	}
@@ -67,7 +68,7 @@ class ResetPass extends React.Component{
 						/>
 
 						<button className={classes["signin"]}>Submit</button>
-						<button className={classes["cancel"]}>Cancel</button>
+						<button className={classes["cancel"]} >Cancel </button> 
 					</div>
 				
 				</div>
