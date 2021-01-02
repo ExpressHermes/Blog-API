@@ -16,7 +16,9 @@ class ToolBar extends React.Component{
         return(
             <Wrap>
                 <div className={classes["toolBar"]}>
-                    <div className={classes["logo"]}>Place Logo. Keep <br/>height of it 100%.</div>
+                    <div className={classes["logo"]}>
+                        <img src="/android-chrome-192x192.png" alt="logo"/>
+                    </div>
                     <Navigation/>
                     <HamBurger 
                         status={this.state.isOpened}
