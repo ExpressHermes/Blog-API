@@ -1,12 +1,8 @@
 .profCard{
-    width: 40%;
-    max-width: 370px;
     padding: 20px 10px 30px;
     box-sizing: border-box;
     text-align: center;
-    margin-left: 10px;
     background-color: rgb(243, 242, 242);
-    float: left;
 }
 
 .avatarHolder{
@@ -57,7 +53,6 @@
 
 .info{
     display: block;
-    margin-left: 380px;
 }
 
 .activity{
@@ -105,4 +100,39 @@
     margin: 5px;
     color: #666;
     font-size: 87%;
+}
+
+@media screen and (min-width: 940px){
+    .profCard{
+        width: 370px;
+        margin-left: 10px;
+        float: left;
+    }
+
+    .info{
+        margin-left: 380px;
+    }
+}
+
+@media screen and (max-width: 940px) and (min-width: 800px){
+    .profCard{
+        width: 40%;
+        margin-left: 10px;
+        float: left;
+    }
+
+    .info{
+        margin-left: calc(40vw);
+    }
+}
+
+@media screen and (max-width: 800px){
+    .profCard{
+        margin: 10px;
+        float: none;
+    }
+
+    .info{
+        margin-left: 0;
+    }
 }
