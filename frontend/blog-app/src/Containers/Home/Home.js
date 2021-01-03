@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Wrap from '../../hoc/Wrap/Wrap';
 import classes from './Home.module.css';
 
@@ -22,6 +23,9 @@ class Home extends React.Component{
 
                 hoc are helper Higher Order Components. <br/>
                 Wrap is one such component made for ease of returning multiple things in a component. It just wraps the chunks without help of a div.<br/><br/>
+
+
+                New page added "Profile page" check here to go <Link to="/profile">Here</Link><br/><br/>
 
                 --- Ravi Sri Ram Chowdary (@ravisrc)
                 

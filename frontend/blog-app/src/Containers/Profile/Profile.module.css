@@ -1,0 +1,138 @@
+.profCard{
+    padding: 20px 10px 30px;
+    box-sizing: border-box;
+    text-align: center;
+    background-color: rgb(243, 242, 242);
+}
+
+.avatarHolder{
+    width: 120px;
+    height: 120px;
+    background-color: #fff;
+    /* border: 1px solid grey; */
+    border-radius: 1000px;
+    overflow: hidden;
+    margin: 60px 0 20px;
+    display: inline-block;
+}
+
+.avatar{
+    height: 100%;
+    width: 100%;
+}
+
+.username{
+    font-weight: bold;
+}
+
+.fullname{
+    font-size: 150%;
+    padding: 10px 0;
+}
+
+.email, .blogs, .followers{
+    padding: 5px 0;
+    font-size: 110%;
+}
+
+.secHead{
+    color: rgb(6, 29, 44);
+    font-weight: bolder;
+    margin-bottom: 10px;
+}
+
+.clearBoth{
+    clear: both;
+}
+
+.secCover{
+    margin: 10px;
+    padding: 10px;
+    background-color: rgb(243,242,242);
+}
+
+.info{
+    display: block;
+}
+
+.activity{
+    padding: 5px;
+}
+
+.comment{
+    border-left: 3px solid grey;
+    margin: 10px;
+    padding: 5px 10px;
+    background-color: #eee;
+    color: #777;
+}
+
+.acName, .blogName, .blogTitle{
+    font-weight: bold;
+    font-style: italic;
+    color: rgb(28, 24, 104);
+    display: inline-block;
+}
+
+.blogName{
+    color: indianred;
+}
+
+.time{
+    color: rgb(61, 61, 61);
+    display: block;
+    font-size: 80%;
+}
+
+.blogTitle{
+    display: block;
+    color: indianred;
+}
+
+.blog{
+    margin: 20px 10px;
+    border-left: 3px solid grey;
+    padding-left: 10px;
+}
+
+.commentInfo, .likeInfo{
+    display: inline-block;
+    margin: 5px;
+    color: #666;
+    font-size: 87%;
+}
+
+@media screen and (min-width: 940px){
+    .profCard{
+        width: 370px;
+        margin-left: 10px;
+        float: left;
+    }
+
+    .info{
+        margin-left: 380px;
+    }
+}
+
+@media screen and (max-width: 940px) and (min-width: 800px){
+    .profCard{
+        width: 40%;
+        margin-left: 10px;
+        float: left;
+    }
+
+    .info{
+        margin-left: calc(40vw);
+    }
+}
+
+@media screen and (max-width: 800px){
+    .profCard{
+        margin: 10px;
+        float: none;
+    }
+
+    .info{
+        margin-left: 0;
+    }
+}
