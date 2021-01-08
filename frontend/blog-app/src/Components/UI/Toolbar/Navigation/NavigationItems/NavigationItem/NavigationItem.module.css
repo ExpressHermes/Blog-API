@@ -5,13 +5,13 @@
 	padding: 2.5px 20px;
 	margin: 12px 5px;
 	text-decoration: none;
-	border-radius: 4px;
+	/* border-radius: 4px; */
 	transition: all ease 0.2s;
 	/* transition: background-color ease 0.2s; */
 	transition: padding ease 0.2s;
 	line-height: 33px;
-	background-color:  rgb(6, 29, 44);
-	border: 1px solid  rgb(6, 29, 44);
+	/* background-color:  rgb(6, 29, 44); */
+	/* border: 1px solid  rgb(6, 29, 44); */
 	color: #eee;
 }
 
@@ -35,13 +35,13 @@
 	   line-height: 48px;
 	   margin: 20px 0;
 	   padding: 0 10px;
-	   color: rgb(63, 99, 129);
+	   color:rgb(138, 23, 80);
 	   text-decoration: none;
 	   border-radius: 0px;
 	   font-size: 18px;
 	   background-color: white;
 	   border: none;
-	   border-bottom: 1px solid rgb(7, 42, 71);
+	   border-bottom: 1px solid rgb(138, 23, 80);
 	   box-sizing: border-box;
 	   font-weight: bold;
 	   transition: 0.1s all;
@@ -50,9 +50,9 @@
 	.activeLink,
 	.link:hover,
 	.link:active {
-	   color: rgb(7, 42, 71);
+	   color: rgb(138, 23, 80);
 	   background-color: white;
-	   border-bottom: 4px solid rgb(7, 42, 71);
+	   border-bottom: 4px solid rgb(138, 23, 80);
 	}
 
 	.auth{

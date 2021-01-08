@@ -42,7 +42,7 @@ class ResetPass extends React.Component{
 			<Wrap>
 				<div className={classes["brandMsg"]}>
 					<div className={classes["brandLogo"]}>
-						Here goes the logo
+						<img src="/logo.png" alt="logo"/>
 					</div>
 					Reset Password
 				</div>

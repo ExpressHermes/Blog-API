@@ -66,7 +66,7 @@ class Signin extends React.Component{
 			<Wrap>
 				<div className={classes["brandMsg"]}>
 					<div className={classes["brandLogo"]}>
-						Here goes the logo
+						<img src="/logo.png" alt="logo"/>
 					</div>
 					Sign In to Blog App
 				</div>
